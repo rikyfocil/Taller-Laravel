@@ -40,3 +40,6 @@ Route::get('saludoJSON/{nombre}', function($nombre){
 
 	return $arreglo;
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
