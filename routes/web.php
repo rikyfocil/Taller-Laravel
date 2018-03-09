@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('categorias/create', "CategoriaController@create")->name('categorias.create');
+Route::post('categorias', "CategoriaController@store")->name('categorias.store');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
