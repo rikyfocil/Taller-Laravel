@@ -11,7 +11,11 @@
 |
 */
 
+Route::get('categorias', "CategoriaController@index")->name('categorias.index');
 Route::get('categorias/create', "CategoriaController@create")->name('categorias.create');
+Route::get('categorias/{id}/edit', "CategoriaController@edit")->name('categorias.edit');
+Route::put('categorias/{id}', "CategoriaController@update")->name('categorias.update');
+
 Route::post('categorias', "CategoriaController@store")->name('categorias.store');
 
 

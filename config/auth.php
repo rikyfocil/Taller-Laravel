@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Taller\User::class,
+            'model' => App\User::class,
         ],
 
         // 'users' => [
