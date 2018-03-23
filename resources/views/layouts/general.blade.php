@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>@yield('title', 'Taller Laravel')</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -147,6 +148,15 @@
             <!-- End Navbar -->
             <div class="panel-header panel-header-sm">
             </div>
+            @if($errors->count() > 0)
+                <div class="alert alert-danger">
+
+                   @foreach ($errors->all() as $error) 
+                    {{$error}}
+                    <br>
+                   @endforeach
+                </div>
+            @endif 
             <div class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -197,6 +207,7 @@
 <script src="{{ asset("js/plugins/bootstrap-notify.js") }}"></script>
 
 <script src="{{ asset("js/now-ui-dashboard.min.js?v=1.0.1") }}"></script>
+<script src="{{ asset("js/setup.js") }}"></script>
 @stack('scripts')
 
 </html>

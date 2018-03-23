@@ -8,6 +8,35 @@ use App\Categoria;
 
 class ProductoController extends Controller
 {
+
+    function creationRules()
+    {
+        $rules = $this->rules();
+        $rules['sku'] = $rules['sku'] . "|unique:productos,sku";
+        return $rules;
+    }
+
+    function validateUniqueSKU($request)
+    {
+        $request->validate([
+            'sku' => 'unique:productos,sku'
+        ]);
+    }
+
+    function rules()
+    {
+        $rules = [
+            'nombre' => "required|string",
+            'cantidad' =>"required|integer",
+            'precio_compra'=> "required|numeric",
+            'precio_venta'=> "required|numeric",
+            'sku'=> "required",
+            'categoria_id'=> "required|exists:categorias,id"
+        ];
+
+        return $rules;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +68,9 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->creationRules());
+        Producto::create($request->all());
+        return redirect()->route('productos.index');
     }
 
     /**
@@ -64,7 +95,7 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
         $categorias = Categoria::allAsIdValue();
-        return view('producto.show', compact('producto', 'categorias'));
+        return view('producto.create', compact('producto', 'categorias'));
     }
 
     /**
@@ -76,7 +107,14 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        $request->validate($this->rules());
+
+        if($request->sku != $producto->sku)
+            $this->validateUniqueSKU($request);
+
+        $producto->update($request->all());
+        return redirect()->route('productos.index');
     }
 
     /**
@@ -87,6 +125,8 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
+        return ['success' => true];
     }
 }

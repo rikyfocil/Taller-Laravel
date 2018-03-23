@@ -57,8 +57,8 @@
 
 	<div class="col-sm-6">
 		<div class="form-group">
-			{{ Form::label('categoria', 'Categoria') }}
-			{{ Form::select('categoria', $categorias, null, ['class' => 'form-control', 'placeholder'=>'Elige una categoria']) }}
+			{{ Form::label('categoria_id', 'Categoria') }}
+			{{ Form::select('categoria_id', $categorias, null, ['class' => 'form-control', 'placeholder'=>'Elige una categoria']) }}
 		</div>
 	</div>
 </div>
