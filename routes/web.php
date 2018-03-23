@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 
 Route::get('prueba', function(){
-	return "Esto es una prueba";
+	return view('layouts.general');
 });
 
 Route::get('saludo/{nombre}', function($nombre){
@@ -50,4 +50,5 @@ Route::get('saludoJSON/{nombre}', function($nombre){
 });
 Auth::routes();
 
+Route::resource('productos', 'ProductoController');
 Route::get('/home', 'HomeController@index')->name('home');
